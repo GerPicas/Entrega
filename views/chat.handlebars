@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat</title>
+        <style>
+    #messages {
+      height: 300px;
+      overflow-y: scroll;
+    }
+  </style>
+    </head>
+    <body>
+        <h1>Chat</h1>
+        <div id="messages"></div>
+        <form id="chatForm">
+            <input type="text" id="messageInput"
+                placeholder="Escribe un mensaje...">
+            <button type="submit">Enviar</button>
+        </form>
+
+        <script>
+    const messagesContainer = document.getElementById('messages');
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+
+    // Función para mostrar un mensaje en el chat
+    function displayMessage(user, message) {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = `${user}: ${message}`;
+      messagesContainer.appendChild(messageElement);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Evento al enviar el formulario
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value;
+      // Envía el mensaje al servidor y guárdalo en la base de datos
+      // Aquí debes implementar la lógica para enviar el mensaje al servidor usando AJAX o WebSocket
+
+      // Muestra el mensaje en el chat
+      displayMessage('Tú', message);
+      messageInput.value = '';
+    });
+
+    // Función para recibir mensajes del servidor y mostrarlos en el chat
+    function receiveMessage(user, message) {
+      displayMessage(user, message);
+    }
+
+    // Evento ficticio para simular la recepción de mensajes del servidor
+    setTimeout(() => {
+      receiveMessage('Usuario1', '¡Hola a todos!');
+    }, 1000);
+  </script>
+    </body>
+</html>
